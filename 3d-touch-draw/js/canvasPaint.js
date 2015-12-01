@@ -1,4 +1,17 @@
+/**
+ * canvasPaint.js
+ *
+ * for "3d-touch-draw" for iPhone/iPad on the web
+ *
+ * Expanded and forked version of @cheeaun's 3d-touch-canvas
+ * (https://github.com/cheeaun/3d-touch-canvas)
+ *
+ * @author  Philipp Kuecuekyan
+ * @version 0.1.0
+ *
+ */
 
+// canvas setup
 var el = document.getElementById('c');
 var ctx = el.getContext('2d');
 var canvasColor = '#000000';
@@ -14,6 +27,7 @@ ctx.lineJoin = ctx.lineCap = 'round';
 
 var isDrawing, lastPoint;
 
+// helper functions
 function distanceBetween(point1, point2){
   return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
 }
@@ -21,6 +35,7 @@ function angleBetween(point1, point2){
   return Math.atan2(point2.x - point1.x, point2.y - point1.y);
 }
 
+// touch/draw functionality
 el.ontouchstart = function(e){
     e.preventDefault();
     isDrawing = true;
@@ -65,6 +80,7 @@ function setCanvasColor(pickerColor) {
     canvasColor = pickerColor;
 }
 
+// color helper functions
 function hexToRgb(hex, alpha) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     var toString = function () {
@@ -100,13 +116,9 @@ function hexToRgb(hex, alpha) {
     } : null;
 }
 
-// Converts canvas to an image
-function convertCanvasToImage(canvas) {
-	var image = new Image();
-	image.src = canvas.toDataURL("image/png");
-	return image;
-}
 
+
+// canvas redraw and resize functions for orientation changes
 function rotateAndResize() {
 
     var canvas = document.getElementById('c');
@@ -140,12 +152,16 @@ function rotateAndResize() {
     ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, canvas.width, canvas.height);
 
 }
-window.addEventListener('orientationchange', rotateAndResize, false);
 
+// plain sizing of canvas
 function sizeCanvas() {
     var canvas = document.getElementById('c');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
+
+
+// orientation change listener
+window.addEventListener('orientationchange', rotateAndResize, false);
 
 sizeCanvas();
