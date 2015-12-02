@@ -3,10 +3,10 @@
 Demo of touch/3d touch events in Mobile Safari: http://phiandco.github.io/3d-touch-draw/ 
 
 For iPhone, iPad; works with the Pencil on iPad Pro. Expanded version of @cheesaun's 3d-touch-canvas:
-  - Touch drawn on <canvas>,
+  - Touch drawn on HTML canvas,
   - Access a color palette to change color,
   - Download/export into new browser window,
-  - Rotate and redraw <canvas> on orientation changes.
+  - Rotate and redraw HTML canvas on orientation changes.
 
 
 ### Version
